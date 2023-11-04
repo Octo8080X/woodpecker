@@ -4,16 +4,17 @@ Woodpecker is cron runner on 'Deno'.
 
 # Caution
 
-It may be subject to significant changes dependent on changes in the Deno.cron specification.
+It may be subject to significant changes dependent on changes in the Deno.cron
+specification.
 
 # Usage
 
 ```sh
 ```
 
-# Config file 
+# Config file
 
-```json 
+```json
 {
   "jobs": [
     {
