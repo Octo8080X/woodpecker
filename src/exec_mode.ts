@@ -12,8 +12,8 @@ export async function switchMode(args: string[]): Promise<void> {
     getConfigFileText();
     Deno.exit();
   } else if (parsedArgs.test || parsedArgs.t) {
-    startCron(parsedArgs);
+    await startCron(parsedArgs);
   } else {
-    startCron(parsedArgs, { isTest: false });
+    await startCron(parsedArgs, { isTest: false });
   }
 }

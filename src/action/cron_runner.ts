@@ -2,12 +2,26 @@ import { colorLog, jsonParse } from "../../deps.ts";
 import { validateConfigArgs } from "../validate/args.ts";
 import { validateConfigJson, WoodpeckerJob } from "../validate/file.ts";
 
-function viewSchedule(name: string, schedule: string, filePath: string) {
-  console.log(`Scheduled cron job[${name}]: ${schedule}: ${filePath}`);
+function viewSchedule(
+  name: string,
+  schedule: string,
+  filePath: string,
+  funcName: string,
+) {
+  console.log(
+    `Scheduled cron job[${name}]: ${schedule}: ${filePath}#${funcName}`,
+  );
 }
 
-function viewExecute(name: string, schedule: string, filePath: string) {
-  console.log(`Execute cron job[${name}]: ${schedule}: ${filePath}`);
+function viewExecute(
+  name: string,
+  schedule: string,
+  filePath: string,
+  funcName: string,
+) {
+  console.log(
+    `Execute cron job[${name}]: ${schedule}: ${filePath}#${funcName}`,
+  );
 }
 
 export async function startCron(
@@ -33,11 +47,12 @@ export async function startCron(
   }
   json.jobs.forEach((job: WoodpeckerJob) => {
     const path = `file:${job.source}`;
-    viewSchedule(job.name, job.schedule, path);
+    const funcName = job.funcName || "job";
+    viewSchedule(job.name, job.schedule, path, funcName);
     Deno.cron(job.name, job.schedule, async () => {
       const source = await import(path);
-      const func = source[job.funcName || "job"];
-      viewExecute(job.name, job.schedule, path);
+      const func = source[funcName];
+      viewExecute(job.name, job.schedule, path, funcName);
       await func();
     });
   });
