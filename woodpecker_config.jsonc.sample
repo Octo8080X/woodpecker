@@ -1,0 +1,15 @@
+{
+  "jobs": [
+    {
+      "name": "Cron job 1",
+      "schedule": "* * * * *",
+      "source": "./cron_task.ts"
+    },
+    {
+      "name": "Cron job 2",
+      "schedule": "* * * * *",
+      "source": "/app/cron_task.ts",
+      "funcName": "job2"
+    }
+  ]
+}
