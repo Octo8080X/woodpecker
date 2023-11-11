@@ -59,7 +59,8 @@ Usage:
       "name": "Cron job 2",
       "schedule": "* * * * *",
       "source": "/usr/src/app/cron_task_2.ts",
-      "funcName": "job2"
+      "funcName": "job2",
+      "backoffSchedule": [3000, 6000]
     }
   ]
 }
@@ -67,3 +68,4 @@ Usage:
 
 - `source` is an absolute path.
 - `funcName` is optional. Default is `job`.
+- `backoffSchedule` is optional.

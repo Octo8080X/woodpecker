@@ -10,7 +10,8 @@ const fileText = `
 //      "name": "sample cron 2",
 //      "schedule": "*/1 * * * *",
 //      "source": "/usr/src/app/cron_task.ts"
-//      "fancName": "job2"
+//      "funcName": "job2"
+//      "backoffSchedule": [1000, 3000, 9000]
 //    }
   ]
 }

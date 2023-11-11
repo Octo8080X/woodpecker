@@ -20,6 +20,7 @@ const woodpeckerJob = zod.object({
       message: "'source' must be file name(.(js|mjs|jsx|ts|mts|tsx))",
     }),
   funcName: zod.string().optional(),
+  backoffSchedule: zod.array(zod.number().gt(0)).optional(),
 });
 
 export type WoodpeckerJob = zod.infer<typeof woodpeckerJob>;
@@ -37,7 +38,7 @@ export function validateConfigJson(json: unknown): json is WoodpeckerConfig {
   const result = woodpeckerConfig.safeParse(json);
 
   if (!result.success) {
-    JSON.parse(result.error.message).forEach((e: zod.ZodError) =>
+    result.error.issues.forEach((e) =>
       console.error(colorLog.error(`${e.path.join(".")}: ${e.message}`))
     );
   }
